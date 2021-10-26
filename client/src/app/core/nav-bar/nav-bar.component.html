@@ -10,12 +10,25 @@
     justify-content-between
   "
 >
-  <img src="/assets/images/logo.png" style="max-height: 70px" alt="logo" />
+  <img
+    src="/assets/images/logo.png"
+    style="max-height: 70px"
+    alt="logo"
+    routerLink="/"
+    class="logo"
+  />
 
-  <div style="font-size: larger">
-    <a href="#" class="p-2 text-dark">Home</a>
-    <a href="#" class="p-2 text-dark">Shop</a>
-    <a href="#" class="p-2 text-dark">Contact</a>
+  <div class="text-uppercase" style="font-size: larger">
+    <a
+      [routerLink]="['/']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="p-2"
+    >
+      Home
+    </a>
+    <a routerLink="/shop" routerLinkActive="active" class="p-2">Shop</a>
+    <a href="#" class="p-2">Contact</a>
   </div>
 
   <div class="d-flex align-items-center">
