@@ -4,6 +4,7 @@ using API.Helpers;
 using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,6 +44,8 @@ namespace API
             // Configure DBContext with SQL
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(ConnectionString));
 
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(ConnectionString));
+
             services.AddSingleton<IConnectionMultiplexer>(c => {
                 //var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);                
                 //return ConnectionMultiplexer.Connect(configuration);
@@ -57,6 +60,8 @@ namespace API
             });
 
             services.AddApplicationServices();
+
+            services.AddIdentityServices(Configuration);
 
             services.AddSwaggerDocumentation();
 
@@ -91,6 +96,8 @@ namespace API
             app.UseStaticFiles();
 
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
