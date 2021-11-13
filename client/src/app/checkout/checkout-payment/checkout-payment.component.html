@@ -1,0 +1,12 @@
+<p>checkout-payment works!</p>
+
+<div
+  class="float-none d-flex justify-content-between flex-column flex-lg-row mb-4"
+>
+  <button type="button" class="btn btn-outline-primary" cdkStepperPrevious>
+    <fa-icon [icon]="faAngleLeft"></fa-icon> Back to Review
+  </button>
+  <button type="button" class="btn btn-primary" (click)="submitOrder()">
+    Submit Order <fa-icon [icon]="faAngleRight"></fa-icon>
+  </button>
+</div>

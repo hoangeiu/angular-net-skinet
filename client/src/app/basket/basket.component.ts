@@ -2,11 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBasket, IBasketItem } from '../shared/models/basket';
 import { BasketService } from './basket.service';
-import {
-  faMinusCircle,
-  faPlusCircle,
-  faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-basket',
@@ -15,10 +10,6 @@ import {
 })
 export class BasketComponent implements OnInit {
   basket$: Observable<IBasket>;
-
-  faMinusCircle = faMinusCircle;
-  faPlusCircle = faPlusCircle;
-  faTrashAlt = faTrashAlt;
 
   constructor(private basketService: BasketService) {}
 
