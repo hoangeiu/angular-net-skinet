@@ -3,6 +3,7 @@
     <li class="nav-item" *ngFor="let step of steps; let i = index">
       <button
         [class.active]="selectedIndex === i"
+        [disabled]="true"
         (click)="onClick(i)"
         class="nav-link text-uppercase font-weight-bold btn-block"
         style="padding: 1.2em"
