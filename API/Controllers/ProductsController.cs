@@ -23,8 +23,8 @@ namespace API.Controllers
         private readonly IGenericRepository<ProductType> _productTypeRepo;
         private readonly IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> productsRepo, 
-            IGenericRepository<ProductBrand> productBrandRepo, 
+        public ProductsController(IGenericRepository<Product> productsRepo,
+            IGenericRepository<ProductBrand> productBrandRepo,
             IGenericRepository<ProductType> productTypeRepo, IMapper mapper)
         {
             _productsRepo = productsRepo;
@@ -33,9 +33,12 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
+        // The response of cache is different than normal response, so I comment it out
+        // I do not know how to fix
+        // [Cached(600)]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
-            [FromQuery]ProductSpecParams productParams)
+            [FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productParams);
 
@@ -51,6 +54,9 @@ namespace API.Controllers
                 totolItems, data));
         }
 
+        // The response of cache is different than normal response, so I comment it out
+        // I do not know how to fix
+        // [Cached(600)]
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
@@ -68,6 +74,9 @@ namespace API.Controllers
             return _mapper.Map<Product, ProductToReturnDto>(product);
         }
 
+        // The response of cache is different than normal response, so I comment it out
+        // I do not know how to fix
+        // [Cached(600)]
         [HttpGet("brands")]
         public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
         {
@@ -76,6 +85,9 @@ namespace API.Controllers
             return Ok(brands);
         }
 
+        // The response of cache is different than normal response, so I comment it out
+        // I do not know how to fix
+        // [Cached(600)]
         [HttpGet("types")]
         public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
         {
