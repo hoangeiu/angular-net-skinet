@@ -12,12 +12,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,17 +38,18 @@ namespace API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {       
+        {
             services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddControllers();
 
             // Configure DBContext with SQL
-            services.AddDbContext<StoreContext>(options => options.UseSqlServer(ConnectionString));
+            services.AddDbContext<StoreContext>(options => options.UseNpgsql(ConnectionString));
 
-            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(ConnectionString));
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseNpgsql(ConnectionString));
 
-            services.AddSingleton<IConnectionMultiplexer>(c => {
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+            {
                 //var configuration = ConfigurationOptions.Parse(Configuration.GetConnectionString("Redis"), true);                
                 //return ConnectionMultiplexer.Connect(configuration);
 
@@ -94,6 +97,13 @@ namespace API
 
             // images
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Content")
+                ),
+                RequestPath = "/content"
+            });
 
             app.UseCors("CorsPolicy");
 
@@ -104,6 +114,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
