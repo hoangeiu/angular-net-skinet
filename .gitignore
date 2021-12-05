@@ -3,5 +3,5 @@ bin
 *.db
 appsettings.json
 *.rdb
-publish
+# publish
 wwwroot
