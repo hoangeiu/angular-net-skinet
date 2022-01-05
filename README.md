@@ -1,7 +1,13 @@
 # angular-net-skinet
 Learn to build an e-commerce app with .Net Core and Angular.
 
-In this course we build a complete application from start to finish and every line of code is demonstrated and explained.
+[Live Demo](https://skinet-12.herokuapp.com/) [Username/password: hoang@test.com/Hoang0511! ]
+
+[Udemy Course](https://www.udemy.com/course/learn-to-build-an-e-commerce-app-with-net-core-and-angular/) - Last Udemy updated 11/2021
+
+[Trello](https://trello.com/b/sPtsUA29/learn-to-build-an-e-commerce-app-with-net-core-and-angular) (privated) 59h35m
+
+In this course I build a complete application from start to finish and every line of code is demonstrated and explained.
 
 Here are some of the things you will learn about in this course:
 
